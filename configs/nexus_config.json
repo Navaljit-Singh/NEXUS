@@ -1,0 +1,56 @@
+{
+  "system": {
+    "engine_name": "NEXUS_CORE_V1",
+    "environment": "simulation",
+    "cpu_affinity": {
+      "market_data_thread": 1,
+      "strategy_thread": 2,
+      "oms_thread": 3,
+      "logging_thread": 4
+    }
+  },
+  "upstox": {
+    "api_key": "YOUR_API_KEY",
+    "api_secret": "YOUR_API_SECRET",
+    "redirect_uri": "http://127.0.0.1:5000/callback",
+    "auth_token": "",
+    "market_data_ws_url": "wss://api.upstox.com/v2/feed/market-data-feed",
+    "order_api_base_url": "https://api.upstox.com/v2"
+  },
+  "market_data": {
+    "feed_mode": "full",
+    "subscriptions": [
+      "NSE_EQ|INE002A01018",
+      "NSE_EQ|INE467B01029",
+      "NSE_INDEX|Nifty 50",
+      "NSE_INDEX|Nifty Bank"
+    ],
+    "buffer_capacity": 65536,
+    "synthetic_bar_interval_seconds": 1
+  },
+  "risk": {
+    "max_order_quantity": 5000,
+    "max_order_value_inr": 1000000.0,
+    "max_daily_loss_inr": 50000.0,
+    "price_collar_pct": 5.0,
+    "max_open_orders": 50,
+    "rate_limit_orders_per_second": 20,
+    "kill_switch_enabled": false
+  },
+  "storage": {
+    "parquet_directory": "./data/market_data",
+    "postgres": {
+      "host": "localhost",
+      "port": 5432,
+      "database": "nexus_trading",
+      "user": "postgres",
+      "password": "nexus_password"
+    }
+  },
+  "logging": {
+    "level": "DEBUG",
+    "log_file": "./logs/nexus.log",
+    "console_output": true,
+    "queue_capacity": 32768
+  }
+}

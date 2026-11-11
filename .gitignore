@@ -1,0 +1,37 @@
+# Build directories
+build/
+bin/
+lib/
+out/
+.cache/
+
+# CMake artifacts
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.ninja
+*.ninja_deps
+*.ninja_log
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs and Data
+logs/
+data/
+*.parquet
+*.log
+*.csv
+
+# Python virtual environment & cache
+__pycache__/
+*.py[cod]
+.venv/
+env/
+.pytest_cache/
