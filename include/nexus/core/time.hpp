@@ -50,7 +50,7 @@ public:
 
     // Format epoch nanoseconds into UTC ISO8601 string: YYYY-MM-DDTHH:MM:SS.mmmmmmZ
     static void format_timestamp(std::uint64_t epoch_ns_val, char* out_buf, std::size_t buf_len) noexcept {
-        if (buf_len < 32) return;
+        if (buf_len < 36) return;
         const auto epoch_s = static_cast<std::time_t>(epoch_ns_val / 1000000000ULL);
         const auto us_remainder = static_cast<std::uint32_t>((epoch_ns_val / 1000ULL) % 1000000ULL);
 
@@ -61,8 +61,13 @@ public:
         gmtime_r(&epoch_s, &tm_buf);
 #endif
         std::snprintf(out_buf, buf_len, "%04d-%02d-%02dT%02d:%02d:%02d.%06uZ",
-                      tm_buf.tm_year + 1900, tm_buf.tm_mon + 1, tm_buf.tm_mday,
-                      tm_buf.tm_hour, tm_buf.tm_min, tm_buf.tm_sec, us_remainder);
+                      (tm_buf.tm_year + 1900) % 10000,
+                      (tm_buf.tm_mon + 1) % 100,
+                      tm_buf.tm_mday % 100,
+                      tm_buf.tm_hour % 100,
+                      tm_buf.tm_min % 100,
+                      tm_buf.tm_sec % 100,
+                      us_remainder);
     }
 };
 
